@@ -622,7 +622,18 @@ describe('bug fixes', function () {
     var date = parse('tomorrow at 9 in the morning', past);
     assert('9:00:00' == t(date));
     assert('5/14/13' == d(date));
-  })
+  });
+
+  it('same results for "ago" and "from now" (fixes: #52)', function(){
+    var past = new Date('May 13, 2013 18:00:00');
+    var ago = parse('50 minutes ago', past);
+    assert('17:10:00' == t(ago));
+    assert('5/13/13' == d(ago));
+
+    var now = parse('50 minutes from now', past);
+    assert('18:50:00' == t(now));
+    assert('5/13/13' == d(now));
+  });
 });
 
 /**
